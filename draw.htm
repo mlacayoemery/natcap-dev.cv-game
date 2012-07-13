@@ -1,0 +1,94 @@
+<html>
+<head>
+<title>
+Draw
+</title>
+<script type="text/JavaScript" src="jsDraw2D.js"></script>
+<script type="text/javascript" src="belize.js"></script>
+</head>
+<body>
+<div id="canvas" style="position:relative;width:800px;height:800px;"></div> 
+<script type="text/JavaScript">
+
+    //Create jsGraphics object
+    var gr = new jsGraphics(document.getElementById("canvas"));
+
+    //Create jsColor object
+    var col = new jsColor("black");
+    var red = new jsColor("red");
+    var green = new jsColor("green");
+
+    //Create jsPen object
+    var pen = new jsPen(col,1);
+
+    var yDim = 30;
+    var xDim = 18;
+
+    var hotels = [[0,0],
+                  [Math.floor((xDim-1)/2),0],
+                  [xDim-1,0],
+                  [0,Math.floor((yDim-1)/2)],
+                  [Math.floor((xDim-1)/2),Math.floor((yDim-1)/2)],
+                  [xDim-1,Math.floor((yDim-1)/2)],
+                  [0,yDim-1],
+                  [Math.floor((xDim-1)/2),yDim-1],
+                  [xDim-1,yDim-1]];
+    
+    var neighbors = [];
+
+    for (n=0; n<hotels.length; n++){
+        neighbors.push.apply(neighbors,findneighbors(hotels[n][0],hotels[n][1],xDim,yDim));
+    }
+
+    for (y=0; y<yDim; y++)
+    {
+        for (x=0; x<xDim; x++)
+        {
+            var grid = new jsPoint(x*20,y*20);
+            var hotel = false;
+            var neighbor = false;
+
+            for (n=0; n<hotels.length; n++)
+            {
+                if ((hotels[n][0] == x) && (hotels[n][1] == y))
+                {
+                    hotel = true;
+                }
+            }
+
+            for (n=0; n<neighbors.length; n++)
+            {
+                if ((neighbors[n][0] == x) && (neighbors[n][1] == y))
+                {
+                    neighbor = true;
+                }
+            }
+
+            if (hotel)
+            {
+                gr.fillCircle(red,grid,5);
+            }
+            else if (neighbor)
+            {
+                gr.fillCircle(green,grid,5);
+            }            
+            else
+            {
+                gr.fillCircle(col,grid,5);
+            }
+        }
+    }
+    
+
+    //You can also code with inline object instantiation like below
+    //gr.drawLine(pen,new jsPoint(40,10),new jsPoint(70,150)); 
+
+    //document.write("<p>");
+    //document.write(hotels);
+    //document.write("<p>");
+    //document.write(neighbors);
+
+</script>
+
+</body>
+</html>
