@@ -17,13 +17,16 @@ Draw
     var col = new jsColor("black");
     var red = new jsColor("red");
     var green = new jsColor("green");
+    var blue = new jsColor("blue");
+    var purple = new jsColor("purple");
 
     //Create jsPen object
     var pen = new jsPen(col,1);
 
-    var yDim = 30;
-    var xDim = 18;
+    var yDim = 39;
+    var xDim = 38;
 
+/*
     var hotels = [[0,0],
                   [Math.floor((xDim-1)/2),0],
                   [xDim-1,0],
@@ -33,7 +36,13 @@ Draw
                   [0,yDim-1],
                   [Math.floor((xDim-1)/2),yDim-1],
                   [xDim-1,yDim-1]];
-    
+*/
+
+        
+    var hotels = [[12,14],[21,10],[28,2]];
+
+    var camps = [[12,14],[21,10],[28,2],[13,18],[10,18]];
+
     var neighbors = [];
 
     for (n=0; n<hotels.length; n++){
@@ -47,8 +56,9 @@ Draw
             var grid = new jsPoint(x*20,y*20);
             var hotel = false;
             var neighbor = false;
+            var camp = false;
 
-            for (n=0; n<hotels.length; n++)
+            for (n=0; !(hotel) && (n<hotels.length); n++)
             {
                 if ((hotels[n][0] == x) && (hotels[n][1] == y))
                 {
@@ -56,7 +66,7 @@ Draw
                 }
             }
 
-            for (n=0; n<neighbors.length; n++)
+            for (n=0; !(neighbor) && (n<neighbors.length); n++)
             {
                 if ((neighbors[n][0] == x) && (neighbors[n][1] == y))
                 {
@@ -64,10 +74,27 @@ Draw
                 }
             }
 
-            if (hotel)
+            for (n=0; !(camp) && (n<camps.length); n++)
+            {
+                if ((camps[n][0] == x) && (camps[n][1] == y))
+                {
+                    camp = true;
+                }
+            }
+
+
+            if ((hotel) && (camp))
+            {
+                gr.fillCircle(purple,grid,5);
+            }
+            else if (hotel)
             {
                 gr.fillCircle(red,grid,5);
             }
+            else if (camp)
+            {
+                gr.fillCircle(blue,grid,5);
+            }            
             else if (neighbor)
             {
                 gr.fillCircle(green,grid,5);
@@ -83,11 +110,32 @@ Draw
     //You can also code with inline object instantiation like below
     //gr.drawLine(pen,new jsPoint(40,10),new jsPoint(70,150)); 
 
-    //document.write("<p>");
-    //document.write(hotels);
-    //document.write("<p>");
-    //document.write(neighbors);
+    for (i=0; i<hotels.length; i++)
+    {
+    document.write("<p>Hotel "+(i+1)+": ("+hotels[i][0]+","+hotels[i][1]+")");
+    document.write("<table border=\"1\">");
+    document.write("<tr><td>Neighbor</td><td>Tourism</td><td>Fishing</td><td>Coral</td><td>Mangroves</td><td>Seagrass</td></tr>");
+    neighbors = findneighbors(hotels[i][0],hotels[i][1],xDim,yDim);
+    for (j=0; j<neighbors.length; j++)
+    {
+    document.write("<tr><td>"+(j+1)+"</td><td>"+data[neighbors[j][1]][neighbors[j][0]][0]+"</td><td></td><td></td><td></td><td></td></tr>");
+    }
+    document.write("</table>");
+    }
 
+
+    for (i=0; i<camps.length; i++)
+    {
+    document.write("<p>Fish Camp "+(i+1)+": ("+camps[i][0]+","+camps[i][1]+")");
+    document.write("<table border=\"1\">");
+    document.write("<tr><td>Neighbor</td><td>Tourism</td><td>Fishing</td><td>Coral</td><td>Mangroves</td><td>Seagrass</td></tr>");
+    neighbors = findneighbors(camps[i][0],camps[i][1],xDim,yDim);
+    for (j=0; j<neighbors.length; j++)
+    {
+    document.write("<tr><td>"+(j+1)+"</td><td>"+data[neighbors[j][1]][neighbors[j][0]][0]+"</td><td></td><td></td><td></td><td></td></tr>");
+    }
+    document.write("</table>");
+    }
 </script>
 
 </body>
