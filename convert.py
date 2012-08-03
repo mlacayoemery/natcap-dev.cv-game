@@ -5,6 +5,7 @@ inFile = open(inFileName)
 lines = [line.split(",") for line in inFile.read().split("\n")]
 inFile.close()
 
+#store data in column major order
 table = {}
 for line in lines:
     if not table.has_key(int(line[2])):
