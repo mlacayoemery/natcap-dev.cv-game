@@ -39,7 +39,7 @@ Draw
 */
 
         
-    var hotels = [[12,14],[12,14],[21,10],[28,2]];
+    var hotels = [[12,14],[21,10],[28,2]];
 
     var camps = [[12,14],[21,10],[28,2],[13,18],[10,18]];
 
@@ -142,6 +142,8 @@ Draw
     var redFont = "FF0000";
     var yellowFont = "FFFF00";
     var colorFont = blackFont;
+    var fishColor = redFont;
+    var tourColor = blackFont;
 	
     for (i=0; i<hotels.length; i++)
     {
@@ -155,7 +157,6 @@ Draw
         grass = data[hotels[i][0]][hotels[i][1]][4];
         
         visit = true;
-        document.write(visited.length);
         for (v=0; v<visited.length; v++)
         {            
              if ((x == visited[v][0]) && (y == visited[v][1]))
@@ -187,8 +188,8 @@ Draw
         document.write("<table border=\"1\">");
         document.write("<tr><td></td><td>Tourism</td><td>Fishing</td><td>Coral</td><td>Mangroves</td><td>Seagrass</td></tr>");
         document.write("<tr><td>"+"<FONT COLOR=&quot;"+colorFont+"&quot;>"+"Hotel "+(i+1)+"</font>"+"<td>"+
-        "<FONT COLOR=&quot;"+colorFont+"&quot;>"+tour+"</font>"+"</td><td>"+
-        "<FONT COLOR=&quot;"+colorFont+"&quot;>"+fish+"</font>"+"</td><td>"+
+        "<FONT COLOR=&quot;"+tourColor+"&quot;>"+tour+"</font>"+"</td><td>"+
+        "<FONT COLOR=&quot;"+fishColor+"&quot;>"+fish+"</font>"+"</td><td>"+
         "<FONT COLOR=&quot;"+colorFont+"&quot;>"+coral+"</font>"+"</td><td>"+
         "<FONT COLOR=&quot;"+colorFont+"&quot;>"+groves+"</font>"+"</td><td>"+
         "<FONT COLOR=&quot;"+colorFont+"&quot;>"+grass+"</font>"+"</td></tr>");
@@ -356,6 +357,9 @@ Draw
     document.write("<p>Coral: "+coralTotal);
     document.write("<p>Groves: "+grovesTotal);
     document.write("<p>Grass: "+grassTotal);
+    document.write("<p>Gain: "+(tourTotal+fishTotal));
+    document.write("<p>Loss: "+(coralTotal+grovesTotal+grassTotal));
+    document.write("<p>Score: "+((tourTotal+fishTotal)-(coralTotal+grovesTotal+grassTotal)));
 
 </script>
 
