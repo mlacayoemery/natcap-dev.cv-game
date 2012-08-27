@@ -39,7 +39,7 @@ Draw
 */
 
         
-    var hotels = [[12,14],[21,10],[28,2]];
+    var hotels = [[12,14],[12,14],[21,10],[28,2]];
 
     var camps = [[12,14],[21,10],[28,2],[13,18],[10,18]];
 
@@ -113,11 +113,21 @@ Draw
 
     var visited = [];
     var fished = [];
+
+    var x = -1;
+    var y = -1;
+    
     var tourTotal = 0;
     var fishTotal = 0;
     var coralTotal = 0;
     var grovesTotal = 0;
     var grassTotal = 0;
+
+    var tourLocal = 0;
+    var fishLocal = 0;
+    var coralLocal = 0;
+    var grovesLocal = 0;
+    var grassLocal = 0;
 
     var tour = 0;
     var fish = 0;
@@ -127,51 +137,70 @@ Draw
 
     var visit = false;
     var fishing = false;
+
+    var blackFont = "000000";
+    var redFont = "FF0000";
+    var yellowFont = "FFFF00";
+    var colorFont = blackFont;
 	
     for (i=0; i<hotels.length; i++)
     {
-        document.write("<p>Hotel "+(i+1)+": ("+hotels[i][0]+","+hotels[i][1]+")");
-        document.write("<table border=\"1\">");
-        document.write("<tr><td></td><td>Tourism</td><td>Fishing</td><td>Coral</td><td>Mangroves</td><td>Seagrass</td></tr>");
-        document.write("<tr><td>Hotel "+(i+1)+"<td>"+
-        data[hotels[i][0]][hotels[i][1]][0]+"</td><td>"+
-        0+"</td><td>"+
-        data[hotels[i][0]][hotels[i][1]][2]+"</td><td>"+
-        data[hotels[i][0]][hotels[i][1]][3]+"</td><td>"+
-        data[hotels[i][0]][hotels[i][1]][4]+"</td></tr>");
-
-        visit = true;
-        for (v=0; v<visited.length; v++)
-        {
-             if ((hotels[i][0] == visited[v][0]) && (hotels[i][1] == visited[v][1]))
-             {
-                  visit = false;
-                  //break;
-             }
-        }
-
-        if (visit)
-        {
-             tourTotal = tourTotal + data[hotels[i][0]][hotels[i][1]][0];
-             //fish = data[hotels[i][0]][hotels[i][1]][1];
-             coralTotal = coralTotal + data[hotels[i][0]][hotels[i][1]][2];
-             grovesTotal = grovesTotal + data[hotels[i][0]][hotels[i][1]][3];
-             grassTotal = grassTotal + data[hotels[i][0]][hotels[i][1]][4];
-             visited.push.apply([hotels[i]]);
-        }
+        x = hotels[i][0];
+        y = hotels[i][1];
 
         tour = data[hotels[i][0]][hotels[i][1]][0];
-        //fish = data[hotels[i][0]][hotels[i][1]][1];
+        fish = 0;
         coral = data[hotels[i][0]][hotels[i][1]][2];
         groves = data[hotels[i][0]][hotels[i][1]][3];
         grass = data[hotels[i][0]][hotels[i][1]][4];
-    
-        neighbors = findneighbors(hotels[i][0],hotels[i][1],xDim,yDim);
+        
+        visit = true;
+        document.write(visited.length);
+        for (v=0; v<visited.length; v++)
+        {            
+             if ((x == visited[v][0]) && (y == visited[v][1]))
+             {
+                  visit = false;
+                  break;
+             }
+        }
+
+
+        if (visit)
+        {
+             tourTotal = tourTotal + tour;
+             fish = fishTotal + fish;
+             coralTotal = coralTotal + coral;
+             grovesTotal = grovesTotal + groves;
+             grassTotal = grassTotal + grass;
+
+             visited.push(hotels[i]);
+
+             colorFont = blackFont;
+        }
+        else
+        {
+            colorFont = yellowFont;
+        }
+
+        document.write("<p>Hotel "+(i+1)+": ("+x+","+y+")");
+        document.write("<table border=\"1\">");
+        document.write("<tr><td></td><td>Tourism</td><td>Fishing</td><td>Coral</td><td>Mangroves</td><td>Seagrass</td></tr>");
+        document.write("<tr><td>"+"<FONT COLOR=&quot;"+colorFont+"&quot;>"+"Hotel "+(i+1)+"</font>"+"<td>"+
+        "<FONT COLOR=&quot;"+colorFont+"&quot;>"+tour+"</font>"+"</td><td>"+
+        "<FONT COLOR=&quot;"+colorFont+"&quot;>"+fish+"</font>"+"</td><td>"+
+        "<FONT COLOR=&quot;"+colorFont+"&quot;>"+coral+"</font>"+"</td><td>"+
+        "<FONT COLOR=&quot;"+colorFont+"&quot;>"+groves+"</font>"+"</td><td>"+
+        "<FONT COLOR=&quot;"+colorFont+"&quot;>"+grass+"</font>"+"</td></tr>");
+
+        document.write("</FONT>");
+   
+        neighbors = findneighbors(x,y,xDim,yDim);
         for (j=0; j<neighbors.length; j++)
         {
             document.write("<tr><td>Neighbor "+(j+1)+"</td><td>"+
             data[neighbors[j][0]][neighbors[j][1]][0]+"</td><td>"+
-            0+"</td><td>"+
+            "<FONT COLOR=&quot;FF0000&quot;>"+0+"</FONT></td><td>"+
             data[neighbors[j][0]][neighbors[j][1]][2]+"</td><td>"+
             data[neighbors[j][0]][neighbors[j][1]][3]+"</td><td>"+
             data[neighbors[j][0]][neighbors[j][1]][4]+"</td></tr>");
@@ -182,7 +211,7 @@ Draw
                  if ((neighbors[j][0] == visited[v][0]) && (neighbors[j][1] == visited[v][1]))
                  {
                       visit = false;
-                      //break;
+                      break;
                  }
             }
 
@@ -193,7 +222,7 @@ Draw
                  coralTotal = coralTotal + data[neighbors[j][0]][neighbors[j][1]][2];
                  grovesTotal = grovesTotal + data[neighbors[j][0]][neighbors[j][1]][3];
                  grassTotal = grassTotal + data[neighbors[j][0]][neighbors[j][1]][4];
-                 visited.push.apply([neighbors[j]]);
+                 visited.push(neighbors[j]);
             }
 
             tour = tour + data[neighbors[j][0]][neighbors[j][1]][0];
@@ -204,7 +233,7 @@ Draw
 
 
         }
-        document.write("<tr><td>Total</td><td>"+tour+"</td><td>"+fish+"</td><td>"+coral+"</td><td>"+groves+"</td><td>"+grass+"</td></tr>")
+        document.write("<tr><td>Total</td><td>"+tour+"</td><td><FONT COLOR=&quot;FF0000&quot;>"+fish+"</FONT></td><td>"+coral+"</td><td>"+groves+"</td><td>"+grass+"</td></tr>")
         document.write("</table>");
     }
 
@@ -215,7 +244,7 @@ Draw
         document.write("<table border=\"1\">");
         document.write("<tr><td></td><td>Tourism</td><td>Fishing</td><td>Coral</td><td>Mangroves</td><td>Seagrass</td></tr>");
         document.write("<tr><td>Fish Camp "+(i+1)+"<td>"+
-        0+"</td><td>"+
+        "<FONT COLOR=&quot;FF0000&quot;>"+0+"</FONT></td><td>"+
         data[camps[i][0]][camps[i][1]][1]+"</td><td>"+
         data[camps[i][0]][camps[i][1]][2]+"</td><td>"+
         data[camps[i][0]][camps[i][1]][3]+"</td><td>"+
@@ -227,7 +256,7 @@ Draw
              if ((camps[i][0] == visited[v][0]) && (camps[i][1] == visited[v][1]))
              {
                   visit = false;
-                  //break;
+                  break;
              }
         }
 
@@ -237,7 +266,7 @@ Draw
              coralTotal = coralTotal + data[camps[i][0]][camps[i][1]][2];
              grovesTotal = grovesTotal + data[camps[i][0]][camps[i][1]][3];
              grassTotal = grassTotal + data[camps[i][0]][camps[i][1]][4];
-             visited.push.apply([camps[i]]);
+             visited.push(camps[i]);
         }
         else
         {
@@ -247,13 +276,14 @@ Draw
                  if ((camps[i][0] == fished[f][0]) && (camps[i][1] == fished[f][1]))
                  {
                       fishing = false;
+                      break;
                  }
             }
 
             if (fishing)
             {
                  fishTotal = fishTotal + data[camps[i][0]][camps[i][1]][1];
-                 fished.push.apply([camps[i]]);
+                 fished.push(camps[i]);
             }
         }
 
@@ -268,7 +298,7 @@ Draw
         for (j=0; j<neighbors.length; j++)
         {
             document.write("<tr><td>Neighbor "+(j+1)+"</td><td>"+
-            0+"</td><td>"+
+            "<FONT COLOR=&quot;FF0000&quot;>"+0+"</FONT></td><td>"+
             data[neighbors[j][0]][neighbors[j][1]][1]+"</td><td>"+
             data[neighbors[j][0]][neighbors[j][1]][2]+"</td><td>"+
             data[neighbors[j][0]][neighbors[j][1]][3]+"</td><td>"+
@@ -290,7 +320,7 @@ Draw
                  coralTotal = coralTotal + data[neighbors[j][0]][neighbors[j][1]][2];
                  grovesTotal = grovesTotal + data[neighbors[j][0]][neighbors[j][1]][3];
                  grassTotal = grassTotal + data[neighbors[j][0]][neighbors[j][1]][4];
-                 visited.push.apply([neighbors[j]]);
+                 visited.push(neighbors[j]);
             }
             else
             {
@@ -307,7 +337,7 @@ Draw
                 if (fishing)
                 {
                      fishTotal = fishTotal + data[neighbors[j][0]][neighbors[j][1]][1];
-                     fished.push.apply([neighbors[j]]);
+                     fished.push(neighbors[j]);
                 }
             }
             tour = 0;
@@ -316,7 +346,7 @@ Draw
             groves = groves + data[neighbors[j][0]][neighbors[j][1]][3];
             grass = grass + data[neighbors[j][0]][neighbors[j][1]][4];    
         }
-        document.write("<tr><td>Total</td><td>"+tour+"</td><td>"+fish+"</td><td>"+coral+"</td><td>"+groves+"</td><td>"+grass+"</td></tr>")
+        document.write("<tr><td>Total</td><td>"+"<FONT COLOR=&quot;FF0000&quot;>"+tour+"</FONT></td><td>"+fish+"</td><td>"+coral+"</td><td>"+groves+"</td><td>"+grass+"</td></tr>")
         document.write("</table>");
     }
 
