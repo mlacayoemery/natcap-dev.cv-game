@@ -45,6 +45,8 @@ Draw
 
     var camps = [[12,14],[21,10],[28,2],[13,18],[10,18]];
 
+    var pa = [[10,10],[12,15]];
+
     var neighbors = [];
 
     for (n=0; n<hotels.length; n++)
@@ -60,6 +62,7 @@ Draw
             var hotel = false;
             var neighbor = false;
             var camp = false;
+            var parea = false;
 
             for (n=0; !(hotel) && (n<hotels.length); n++)
             {
@@ -86,10 +89,23 @@ Draw
             }
 
 
+            for (n=0; !(parea) && (n<pa.length); n++)
+            {
+                if ((pa[n][0] == x) && (pa[n][1] == y))
+                {
+                    parea = true;
+                }
+            }
+
+
             if ((hotel) && (camp))
             {
                 gr.fillCircle(maroon,grid,5);
             }
+            else if (parea)
+            {
+                gr.fillCircle(green,grid,5);
+            }      
             else if (hotel)
             {
                 gr.fillCircle(red,grid,5);
@@ -101,7 +117,7 @@ Draw
             else if (neighbor)
             {
                 gr.fillCircle(orange,grid,5);
-            }            
+            }      
             else
             {
                 gr.fillCircle(gray,grid,5);
@@ -110,11 +126,8 @@ Draw
     }
     
 
-    //You can also code with inline object instantiation like below
-    //gr.drawLine(pen,new jsPoint(40,10),new jsPoint(70,150)); 
-
-    var visited = [];
-    var fished = [];
+    var visited = [[10,10],[12,15]];
+    var fished = [[10,10],[12,15]];
 
     var x = -1;
     var y = -1;
