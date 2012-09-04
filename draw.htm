@@ -18,7 +18,9 @@ Draw
     var red = new jsColor("red");
     var green = new jsColor("green");
     var blue = new jsColor("blue");
-    var purple = new jsColor("purple");
+    var maroon = new jsColor("maroon");
+    var orange = new jsColor("#FF7F00");
+    var gray = new jsColor("#D3D3D3");
 
     //Create jsPen object
     var pen = new jsPen(col,1);
@@ -86,7 +88,7 @@ Draw
 
             if ((hotel) && (camp))
             {
-                gr.fillCircle(purple,grid,5);
+                gr.fillCircle(maroon,grid,5);
             }
             else if (hotel)
             {
@@ -98,11 +100,11 @@ Draw
             }            
             else if (neighbor)
             {
-                gr.fillCircle(green,grid,5);
+                gr.fillCircle(orange,grid,5);
             }            
             else
             {
-                gr.fillCircle(col,grid,5);
+                gr.fillCircle(gray,grid,5);
             }
         }
     }
