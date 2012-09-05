@@ -9,6 +9,15 @@ Draw
 <body>
 <div id="canvas" style="position:relative;width:800px;height:800px;"></div> 
 <script type="text/JavaScript">
+    var hotels = [[12,14],[21,10],[28,2]];
+
+    var camps = [[12,14],[21,10],[28,2],[13,18],[10,18]];
+
+    var pa = [[10,10],[12,15]];
+    //these variable should contain the same value as pa
+    var visited = [[10,10],[12,15]];
+    var fished = [[10,10],[12,15]];
+
 
     //Create jsGraphics object
     var gr = new jsGraphics(document.getElementById("canvas"));
@@ -39,13 +48,6 @@ Draw
                   [Math.floor((xDim-1)/2),yDim-1],
                   [xDim-1,yDim-1]];
 */
-
-        
-    var hotels = [[12,14],[21,10],[28,2]];
-
-    var camps = [[12,14],[21,10],[28,2],[13,18],[10,18]];
-
-    var pa = [[10,10],[12,15]];
 
     var neighbors = [];
 
@@ -124,10 +126,6 @@ Draw
             }
         }
     }
-    
-
-    var visited = [[10,10],[12,15]];
-    var fished = [[10,10],[12,15]];
 
     var x = -1;
     var y = -1;
