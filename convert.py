@@ -10,7 +10,10 @@ table = {}
 for line in lines:
     if not table.has_key(int(line[2])):
         table[int(line[2])]={}
-    table[int(line[2])][int(line[3])]=map(float,line[4:10])
+    try:
+        table[int(line[2])][int(line[3])]=map(int,line[4:])
+    except ValueError:
+        table[int(line[2])][int(line[3])]=map(float,line[4:])
 
 outFileName = inFileName+".js"
 outFile = open(outFileName, "w")
