@@ -1,0 +1,122 @@
+<html>
+
+<head>
+
+<title>Belize Game Score Calculator</title>
+
+<script language="javascript" type="text/javascript">
+function getinput(){
+
+var hotels = [];
+var camps = [];
+var pa = [];
+
+var x = -1;
+var y = -1;
+
+x = document.calculator.hotelX1.value;
+y = document.calculator.hotelY1.value;
+
+if (x!="" && y!="" && !isNaN(x) && !isNaN(y)){
+    hotels.push([x,y])
+}
+
+x = document.calculator.hotelX2.value;
+y = document.calculator.hotelY2.value;
+
+if (x!="" && y!="" && !isNaN(x) && !isNaN(y)){
+    hotels.push([x,y])
+}
+
+x = document.calculator.hotelX3.value;
+y = document.calculator.hotelY3.value;
+
+if (x!="" && y!="" && !isNaN(x) && !isNaN(y)){
+    hotels.push([x,y])
+}
+
+document.calculator.fish.value=0;
+document.calculator.tour.value=0;
+document.calculator.gain.value=0;
+document.calculator.coral.value=0;
+document.calculator.groves.value=0;
+document.calculator.grass.value=0;
+document.calculator.loss.value=0;
+document.calculator.score.value=0;
+}
+</script>
+
+</head>
+
+<body>
+
+<!-- Opening a HTML Form. --> 
+<form name="calculator">
+<table>
+<tr><td>
+    <table>
+    <tr><td><center>Hotels</center></td><td><center>Fish Camps</center></td><td><center>Protected Areas</center></td></tr>
+
+    <tr><td valign=top>
+        <table>
+        <tr><td>#</td><td><center>X</center></td><td><center>Y</center></td></tr>
+        <tr><td>1</td><td><input type="text" name="hotelX1" size=2></td><td><input type="text" name="hotelY1" size=2></td></tr>
+        <tr><td>2</td><td><input type="text" name="hotelX2" size=2></td><td><input type="text" name="hotelY2" size=2></td></tr>
+        <tr><td>3</td><td><input type="text" name="hotelX3" size=2></td><td><input type="text" name="hotelY3" size=2></td></tr>
+        </table>
+    </td>
+
+    <td>
+        <table>
+        <tr><td>#</td><td><center>X</center></td><td><center>Y</center></td></tr>
+        <tr><td>1</td><td><input type="text" name="campX1" size=2></td><td><input type="text" name="campY1" size=2></td></tr>
+        <tr><td>2</td><td><input type="text" name="campX2" size=2></td><td><input type="text" name="campY2" size=2></td></tr>
+        <tr><td>3</td><td><input type="text" name="campX3" size=2></td><td><input type="text" name="campY3" size=2></td></tr>
+        <tr><td>4</td><td><input type="text" name="campX4" size=2></td><td><input type="text" name="campY4" size=2></td></tr>
+        <tr><td>5</td><td><input type="text" name="campX5" size=2></td><td><input type="text" name="campY5" size=2></td></tr>
+        </table>
+    </td>
+
+    <td>
+        <table>
+        <tr><td>#</td><td><center>X</center></td><td><center>Y</center></td></tr>
+        <tr><td>1</td><td><input type="text" name="protectedX1" size=2></td><td><input type="text" name="protectedY1" size=2></td></tr>
+        <tr><td>2</td><td><input type="text" name="protectedX2" size=2></td><td><input type="text" name="protectedY2" size=2></td></tr>
+        <tr><td>3</td><td><input type="text" name="protectedX3" size=2></td><td><input type="text" name="protectedY3" size=2></td></tr>
+        <tr><td>4</td><td><input type="text" name="protectedX4" size=2></td><td><input type="text" name="protectedY4" size=2></td></tr>
+        <tr><td>5</td><td><input type="text" name="protectedX5" size=2></td><td><input type="text" name="protectedY5" size=2></td></tr>
+        </table>
+    </td></tr>
+    </table>
+</td></tr>
+
+<tr>
+<td>
+    <table>
+        <tr><td></td><td></td><td>Fish</td><td></td><td>Tourism</td><td></td><td></td></tr>
+        <tr><td></td><td></td><td><input disabled type="text" name="fish" size=4></td>
+        <td>+</td>
+        <td><input disabled type="txt" name="tour" size=4></td>
+        <td>=</td>
+        <td><input disabled type="txt" name="gain" size=4></td></tr>
+        
+        <tr><td>Coral</td><td></td><td>Mangroves</td><td></td><td>Seagrass</td><td></td><td></td></tr>
+        <tr><td><input disabled type="text" name="coral" size=4></td>
+        <td>+</td>
+        <td><input disabled type="txt" name="groves" size=4></td>
+        <td>+</td>
+        <td><input disabled type="txt" name="grass" size=4></td>
+        <td>=</td>        
+        <td><input disabled type="txt" name="loss" size=4></td></tr>
+
+        <tr><td></td><td></td><td></td><td></td><td align=right>Score</td><td></td><td><input disabled type="txt" name="score" size=4></td></tr>
+        
+    </table>
+</td></tr>
+</table>
+
+<input type="button" value="Calculate" onclick="javascript:getinput();">
+</form>
+
+</body>
+</html>
