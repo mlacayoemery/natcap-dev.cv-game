@@ -14,92 +14,92 @@ var pa = [];
 var x = -1;
 var y = -1;
 
-x = document.calculator.hotelX1.value;
-y = document.calculator.hotelY1.value;
+x = parseInt(document.calculator.hotelX1.value);
+y = parseInt(document.calculator.hotelY1.value);
 
 if (x!="" && y!="" && !isNaN(x) && !isNaN(y)){
     hotels.push([x,y])
 }
 
-x = document.calculator.hotelX2.value;
-y = document.calculator.hotelY2.value;
+x = parseInt(document.calculator.hotelX2.value);
+y = parseInt(document.calculator.hotelY2.value);
 
 if (x!="" && y!="" && !isNaN(x) && !isNaN(y)){
     hotels.push([x,y])
 }
 
-x = document.calculator.hotelX3.value;
-y = document.calculator.hotelY3.value;
+x = parseInt(document.calculator.hotelX3.value);
+y = parseInt(document.calculator.hotelY3.value);
 
 if (x!="" && y!="" && !isNaN(x) && !isNaN(y)){
     hotels.push([x,y])
 }
 
-x = document.calculator.campX1.value;
-y = document.calculator.campY1.value;
+x = parseInt(document.calculator.campX1.value);
+y = parseInt(document.calculator.campY1.value);
 
 if (x!="" && y!="" && !isNaN(x) && !isNaN(y)){
     camps.push([x,y])
 }
 
-x = document.calculator.campX2.value;
-y = document.calculator.campY2.value;
+x = parseInt(document.calculator.campX2.value);
+y = parseInt(document.calculator.campY2.value);
 
 if (x!="" && y!="" && !isNaN(x) && !isNaN(y)){
     camps.push([x,y])
 }
 
-x = document.calculator.campX3.value;
-y = document.calculator.campY3.value;
+x = parseInt(document.calculator.campX3.value);
+y = parseInt(document.calculator.campY3.value);
 
 if (x!="" && y!="" && !isNaN(x) && !isNaN(y)){
     camps.push([x,y])
 }
 
-x = document.calculator.campX4.value;
-y = document.calculator.campY4.value;
+x = parseInt(document.calculator.campX4.value);
+y = parseInt(document.calculator.campY4.value);
 
 if (x!="" && y!="" && !isNaN(x) && !isNaN(y)){
     camps.push([x,y])
 }
 
-x = document.calculator.campX5.value;
-y = document.calculator.campY5.value;
+x = parseInt(document.calculator.campX5.value);
+y = parseInt(document.calculator.campY5.value);
+
+if (x!="" && y!="" && !isNaN(x) && !isNaN(y)){
+    camps.push([x,y])
+}
+
+x = parseInt(document.calculator.protectedX1.value);
+y = parseInt(document.calculator.protectedY1.value);
 
 if (x!="" && y!="" && !isNaN(x) && !isNaN(y)){
     pa.push([x,y])
 }
 
-x = document.calculator.protectedX1.value;
-y = document.calculator.protectedY1.value;
+x = parseInt(document.calculator.protectedX2.value);
+y = parseInt(document.calculator.protectedY2.value);
 
 if (x!="" && y!="" && !isNaN(x) && !isNaN(y)){
     pa.push([x,y])
 }
 
-x = document.calculator.protectedX2.value;
-y = document.calculator.protectedY2.value;
+x = parseInt(document.calculator.protectedX3.value);
+y = parseInt(document.calculator.protectedY3.value);
 
 if (x!="" && y!="" && !isNaN(x) && !isNaN(y)){
     pa.push([x,y])
 }
 
-x = document.calculator.protectedX3.value;
-y = document.calculator.protectedY3.value;
+x = parseInt(document.calculator.protectedX4.value);
+y = parseInt(document.calculator.protectedY4.value);
 
 if (x!="" && y!="" && !isNaN(x) && !isNaN(y)){
     pa.push([x,y])
 }
 
-x = document.calculator.protectedX4.value;
-y = document.calculator.protectedY4.value;
-
-if (x!="" && y!="" && !isNaN(x) && !isNaN(y)){
-    pa.push([x,y])
-}
-
-x = document.calculator.protectedX5.value;
-y = document.calculator.protectedY5.value;
+x = parseInt(document.calculator.protectedX5.value);
+y = parseInt(document.calculator.protectedY5.value);
 
 if (x!="" && y!="" && !isNaN(x) && !isNaN(y)){
     pa.push([x,y])
@@ -115,31 +115,23 @@ function findneighbors(x,y,xDim,yDim)
 
     var maxColIndex = xDim-1;
     var maxRowIndex = yDim-1;
-
-    //document.write("<p>");
-    //document.write([x,y]);
-    //document.write(" ");
     
     if (x == 0)
     {
         if (y == 0)
         {
-            //document.write("top left corner");
             var neighbors = [[x,y+1],[x+1,y+1],[x+1,y]];
         }
         else if (y == maxRowIndex)
         {
-            //document.write("bottom left corner");
             var neighbors = [[x,y-1],[x+1,y-1],[x+1,y]];
         }
         else if ((y > 0) && (y < maxRowIndex))
         {
-            //document.write("left edge");
             var neighbors = [[x,y-1],[x+1,y-1],[x+1,y],[x+1,y+1],[x,y+1]];
         }
         else
         {
-            //document.write("Column out of range.");
             var neighbors = [];
         }    
     }
@@ -147,22 +139,18 @@ function findneighbors(x,y,xDim,yDim)
     {
         if (y == 0)
         {
-            //document.write("top right corner");
             var neighbors = [[x-1,y],[x-1,y+1],[x,y+1]];
         }
         else if (y == maxRowIndex)
         {
-            //document.write("bottom right corner");
             var neighbors = [[x-1,y],[x-1,y-1],[x,y-1]];
         }
         else if ((y > 0) && (y < maxRowIndex))
         {
-            //document.write("right edge");
             var neighbors = [[x,y-1],[x-1,y-1],[x-1,y],[x-1,y+1],[x,y+1]];
         }
         else
         {
-            //document.write("Column out of range.");
             var neighbors = [];
         }        
     }
@@ -170,28 +158,23 @@ function findneighbors(x,y,xDim,yDim)
     {
         if (y == 0)
         {
-            //document.write("top edge");
             var neighbors = [[x-1,y],[x-1,y+1],[x,y+1],[x+1,y+1],[x+1,y]];
         }
         else if (y == maxRowIndex)
         {
-            //document.write("bottom edge");
             var neighbors = [[x-1,y],[x-1,y-1],[x,y-1],[x+1,y-1],[x+1,y]];
         }
         else if ((y > 0) && (y < maxRowIndex))
         {
-            //document.write("center");
             var neighbors = [[x-1,y],[x-1,y+1],[x,y+1],[x+1,y+1],[x+1,y],[x+1,y-1],[x,y-1],[x-1,y-1]];
         }
         else
         {
-            //document.write("Column out of range.");
             var neighbors = [];
         }        
     }
     else
     {
-       //document.write("Row out of range.");
        var neighbors = [];
     }
 return neighbors;
@@ -207,6 +190,10 @@ for (n=0; n<pa.length; n++){
 visited.push([pa[n][0],pa[n][1]]);
 fished.push([pa[n][0],pa[n][1]]);
 }
+
+
+    var xDim = 38;
+    var yDim = 39;
 
     var x = -1;
     var y = -1;
@@ -232,6 +219,171 @@ fished.push([pa[n][0],pa[n][1]]);
     var visit = false;
     var fishing = false;
 
+    var neighbors = [];
+
+
+    for (i=0; i<hotels.length; i++)
+    {
+        x = hotels[i][0];
+        y = hotels[i][1];
+
+        tour = data[hotels[i][0]][hotels[i][1]][0];
+        fish = 0;
+        coral = data[hotels[i][0]][hotels[i][1]][2];
+        groves = data[hotels[i][0]][hotels[i][1]][3];
+        grass = data[hotels[i][0]][hotels[i][1]][4];
+        
+        visit = true;
+        for (v=0; v<visited.length; v++)
+        {            
+             if ((x == visited[v][0]) && (y == visited[v][1]))
+             {
+                  visit = false;
+                  break;
+             }
+        }
+
+
+        if (visit)
+        {
+             tourTotal = tourTotal + tour;
+             fish = fishTotal + fish;
+             coralTotal = coralTotal + coral;
+             grovesTotal = grovesTotal + groves;
+             grassTotal = grassTotal + grass;
+
+             visited.push(hotels[i]);             
+        }
+
+   
+        neighbors = findneighbors(x,y,xDim,yDim);
+        for (j=0; j<neighbors.length; j++)
+        {
+
+            visit = true;
+            for (v=0; v<visited.length; v++)
+            {
+                 if ((neighbors[j][0] == visited[v][0]) && (neighbors[j][1] == visited[v][1]))
+                 {
+                      visit = false;
+                      break;
+                 }
+            }
+
+            if (visit)
+            {    
+                 tourTotal = tourTotal + data[neighbors[j][0]][neighbors[j][1]][0];
+                 coralTotal = coralTotal + data[neighbors[j][0]][neighbors[j][1]][2];
+                 grovesTotal = grovesTotal + data[neighbors[j][0]][neighbors[j][1]][3];
+                 grassTotal = grassTotal + data[neighbors[j][0]][neighbors[j][1]][4];
+                 visited.push(neighbors[j]);
+            }
+
+            tour = tour + data[neighbors[j][0]][neighbors[j][1]][0];
+            coral = coral + data[neighbors[j][0]][neighbors[j][1]][2];
+            groves = groves + data[neighbors[j][0]][neighbors[j][1]][3];
+            grass = grass + data[neighbors[j][0]][neighbors[j][1]][4];
+
+
+        }
+
+    }
+
+    for (i=0; i<camps.length; i++)
+    {
+
+        visit = true;
+        for (v=0; v<visited.length; v++)
+        {
+             if ((camps[i][0] == visited[v][0]) && (camps[i][1] == visited[v][1]))
+             {
+                  visit = false;
+                  break;
+             }
+        }
+
+        if (visit)
+        {
+             fishTotal = fishTotal + data[camps[i][0]][camps[i][1]][1];
+             coralTotal = coralTotal + data[camps[i][0]][camps[i][1]][2];
+             grovesTotal = grovesTotal + data[camps[i][0]][camps[i][1]][3];
+             grassTotal = grassTotal + data[camps[i][0]][camps[i][1]][4];
+             visited.push(camps[i]);
+        }
+        else
+        {
+            fishing = true;
+            for (f=0; f<fished.length; f++)
+            {
+                 if ((camps[i][0] == fished[f][0]) && (camps[i][1] == fished[f][1]))
+                 {
+                      fishing = false;
+                      break;
+                 }
+            }
+
+            if (fishing)
+            {
+                 fishTotal = fishTotal + data[camps[i][0]][camps[i][1]][1];
+                 fished.push(camps[i]);
+            }
+        }
+
+        //tour = data[camps[i][0]][camps[i][1]][0];
+        tour = 0;
+        fish = data[camps[i][0]][camps[i][1]][1];
+        coral = data[camps[i][0]][camps[i][1]][2];
+        groves = data[camps[i][0]][camps[i][1]][3];
+        grass = data[camps[i][0]][camps[i][1]][4];
+        
+        neighbors = findneighbors(camps[i][0],camps[i][1],xDim,yDim);
+        for (j=0; j<neighbors.length; j++)
+        {
+            visit = true;
+            for (v=0; v<visited.length; v++)
+            {
+                 if ((neighbors[j][0] == visited[v][0]) && (neighbors[j][1] == visited[v][1]))
+                 {
+                      visit = false;
+                      //break;
+                 }
+            }
+
+            if (visit)
+            {    
+                 fishTotal = fishTotal + data[neighbors[j][0]][neighbors[j][1]][1];
+                 coralTotal = coralTotal + data[neighbors[j][0]][neighbors[j][1]][2];
+                 grovesTotal = grovesTotal + data[neighbors[j][0]][neighbors[j][1]][3];
+                 grassTotal = grassTotal + data[neighbors[j][0]][neighbors[j][1]][4];
+                 visited.push(neighbors[j]);
+            }
+            else
+            {
+                fishing = true;
+                for (f=0; f<fished.length; f++)
+                {
+                     if ((neighbors[j][0] == fished[f][0]) && (neighbors[j][1] == fished[f][1]))
+                     {
+                          fishing = false;
+                          //break;
+                     }
+                }
+
+                if (fishing)
+                {
+                     fishTotal = fishTotal + data[neighbors[j][0]][neighbors[j][1]][1];
+                     fished.push(neighbors[j]);
+                }
+            }
+            tour = 0;
+            fish = fish + data[neighbors[j][0]][neighbors[j][1]][1];
+            coral = coral + data[neighbors[j][0]][neighbors[j][1]][2];
+            groves = groves + data[neighbors[j][0]][neighbors[j][1]][3];
+            grass = grass + data[neighbors[j][0]][neighbors[j][1]][4];    
+        }
+    }
+
+
 document.calculator.fish.value=fishTotal;
 document.calculator.tour.value=tourTotal;
 document.calculator.gain.value=fishTotal+tourTotal;
@@ -240,6 +392,48 @@ document.calculator.groves.value=grovesTotal;
 document.calculator.grass.value=grassTotal;
 document.calculator.loss.value=coralTotal+grovesTotal+grassTotal;
 document.calculator.score.value=(tourTotal+fishTotal)-(coralTotal+grovesTotal+grassTotal);
+}
+
+function example(){
+
+document.calculator.hotelX1.value=12;
+document.calculator.hotelY1.value=14;
+document.calculator.hotelX2.value=21;
+document.calculator.hotelY2.value=10;
+document.calculator.hotelX3.value=28;
+document.calculator.hotelY3.value=2;
+
+document.calculator.campX1.value=12;
+document.calculator.campY1.value=14;
+document.calculator.campX2.value=21;
+document.calculator.campY2.value=10;
+document.calculator.campX3.value=28;
+document.calculator.campY3.value=2;
+document.calculator.campX4.value=13;
+document.calculator.campY4.value=18;
+document.calculator.campX5.value=10;
+document.calculator.campY5.value=18;
+
+
+document.calculator.protectedX1.value=10;
+document.calculator.protectedY1.value=10;
+document.calculator.protectedX2.value=12;
+document.calculator.protectedY2.value=15;
+document.calculator.protectedX3.value="";
+document.calculator.protectedY3.value="";
+document.calculator.protectedX4.value="";
+document.calculator.protectedY4.value="";
+document.calculator.protectedX5.value="";
+document.calculator.protectedY5.value="";
+
+document.calculator.fish.value="";
+document.calculator.tour.value="";
+document.calculator.gain.value="";
+document.calculator.coral.value="";
+document.calculator.groves.value="";
+document.calculator.grass.value="";
+document.calculator.loss.value="";
+document.calculator.score.value="";
 }
 
 </script>
@@ -313,6 +507,7 @@ document.calculator.score.value=(tourTotal+fishTotal)-(coralTotal+grovesTotal+gr
 </td></tr>
 </table>
 
+<input type="button" value="Example" onclick="javascript:example();">
 <input type="button" value="Calculate" onclick="javascript:getinput();">
 </form>
 
