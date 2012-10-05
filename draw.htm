@@ -13,6 +13,8 @@ Draw
 
     var camps = [[12,14],[21,10],[28,2],[13,18],[10,18]];
 
+    var coast = [[4,15],[5,15],[5,16],[6,16],[7,16],[8,15],[8,16],[9,15],[10,15],[11,15],[12,14],[13,14],[14,14],[15,13],[15,14],[16,13],[17,13],[18,12],[19,11],[19,12],[20,11],[21,10],[22,9],[22,10],[23,6],[23,7],[23,8],[23,9],[24,5],[25,5],[26,4],[26,5],[27,3],[28,2],[29,1],[30,1],[31,1]];
+
     var pa = [[10,10],[12,15]];
     //these variable should contain the same value as pa
     var visited = [[10,10],[12,15]];
@@ -60,11 +62,22 @@ Draw
     {
         for (x=0; x<xDim; x++)
         {
-            var grid = new jsPoint(x*20,y*20);
+            
+            var grid = new jsPoint(y*20,x*20);
             var hotel = false;
             var neighbor = false;
             var camp = false;
             var parea = false;
+            var carea = false
+
+            for (n=0; !(carea) && (n<coast.length); n++)
+            {
+                if ((coast[n][0] == x) && (coast[n][1] == y))
+                {
+                    carea = true;
+                    document.write("Coast!");
+                }
+            }            
 
             for (n=0; !(hotel) && (n<hotels.length); n++)
             {
@@ -99,7 +112,10 @@ Draw
                 }
             }
 
-
+            if (carea)
+            {
+                gr.fillCircle(col,grid,7);
+            }
             if ((hotel) && (camp))
             {
                 gr.fillCircle(maroon,grid,5);
@@ -373,7 +389,7 @@ Draw
     document.write("<p>Gain: "+(tourTotal+fishTotal));
     document.write("<p>Loss: "+(coralTotal+grovesTotal+grassTotal));
     document.write("<p>Score: "+((tourTotal+fishTotal)-(coralTotal+grovesTotal+grassTotal)));
-
+    
 </script>
 
 </body>
