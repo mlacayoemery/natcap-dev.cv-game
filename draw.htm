@@ -389,14 +389,14 @@ Draw
     document.write("</table>");
     
     document.write("<p>Totals");
-    document.write("<p>Tour: "+tourTotal);
-    document.write("<p>Fish: "+fishTotal);
-    document.write("<p>Coral: "+coralTotal);
-    document.write("<p>Groves: "+grovesTotal);
-    document.write("<p>Grass: "+grassTotal);
-    document.write("<p>Gain: "+(tourTotal+fishTotal));
-    document.write("<p>Loss: "+(coralTotal+grovesTotal+grassTotal));
-    document.write("<p>Score: "+((tourTotal+fishTotal)-(coralTotal+grovesTotal+grassTotal)));
+    document.write("<p>Tour: "+Math.round(tourTotal));
+    document.write("<p>Fish: "+Math.round(fishTotal));
+    document.write("<p>Coral: "+Math.round(coralTotal));
+    document.write("<p>Groves: "+Math.round(grovesTotal));
+    document.write("<p>Grass: "+Math.round(grassTotal));
+    document.write("<p>Gain: "+(Math.round(tourTotal)+Math.round(fishTotal)));
+    document.write("<p>Loss: "+(Math.round(coralTotal)+Math.round(grovesTotal)+Math.round(grassTotal)));
+    document.write("<p>Score: "+((Math.round(tourTotal)+Math.round(fishTotal))-(Math.round(coralTotal)+Math.round(grovesTotal)+Math.round(grassTotal))));
     
 </script>
 
