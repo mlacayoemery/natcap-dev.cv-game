@@ -379,6 +379,15 @@ Draw
         document.write("</table>");
     }
 
+    document.write("<p>Coast")
+    document.write("<table border=\"1\">");
+    document.write("<tr><td>#</td><td>X</td><td>Y</td><td>CV</td></tr>");
+    for (n=0; (n<coast.length); n++)
+    {
+        document.write("<tr><td>"+(n+1)+"</td><td>"+coast[n][1]+"</td><td>"+coast[n][0]+"</td><td>"+data[coast[n][0]][coast[n][1]][6]+"</td></tr>");
+    }
+    document.write("</table>");
+    
     document.write("<p>Totals");
     document.write("<p>Tour: "+tourTotal);
     document.write("<p>Fish: "+fishTotal);
