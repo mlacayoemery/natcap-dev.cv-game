@@ -381,11 +381,92 @@ Draw
 
     document.write("<p>Coast")
     document.write("<table border=\"1\">");
-    document.write("<tr><td>#</td><td>X</td><td>Y</td><td>CV</td></tr>");
+    document.write("<tr><td>#</td><td>X</td><td>Y</td><td>CV</td><td>Habitat1</td><td>Habitat2</td><td>Loss</td><td>Impact</td></tr>");
+    var cv1 = 0;
+    var cv2 = 0;
+    var loss = 0;
+    var impact = 0;
+    var totalImpact = 0;
+    var hotelNeighbors = [];
+    for (n=0; n<hotels.length; n++)
+    {
+        hotelNeighbors.push.apply(hotelNeighbors,findneighbors(hotels[n][0],hotels[n][1],xDim,yDim));
+    }
+    
     for (n=0; (n<coast.length); n++)
     {
-        document.write("<tr><td>"+(n+1)+"</td><td>"+coast[n][1]+"</td><td>"+coast[n][0]+"</td><td>"+data[coast[n][0]][coast[n][1]][6]+"</td></tr>");
+        cv1 = data[coast[n][0]][coast[n][1]][2] + data[coast[n][0]][coast[n][1]][3] + data[coast[n][0]][coast[n][1]][4];
+        neighbors = findneighbors(coast[n][0],coast[n][1],xDim,yDim);
+        for (j=0; j<neighbors.length; j++){
+            cv1 = cv1 + data[neighbors[j][0]][neighbors[j][1]][2] + data[neighbors[j][0]][neighbors[j][1]][3] + data[neighbors[j][0]][neighbors[j][1]][4];
+        }
+
+        hotel = false;
+        
+        for (h=0; !(hotel) && (h<hotels.length); h++)
+        {
+            if ((hotels[h][0] == coast[n][0]) && (hotels[h][1] == coast[n][1]))
+            {
+                hotel = true;
+            }
+        }
+
+        if (hotel){
+            cv2 = 0;
+        }
+        else {
+            cv2 = data[coast[n][0]][coast[n][1]][2] + data[coast[n][0]][coast[n][1]][3] + data[coast[n][0]][coast[n][1]][4];
+        }
+
+        for (j=0; j<neighbors.length; j++){
+            hotel = false;
+            for (h=0; !(hotel) && (h<hotelNeighbors.length); h++)
+            {
+                if ((hotelNeighbors[h][0] == neighbors[j][0]) && (hotelNeighbors[h][1] == neighbors[j][1]))
+                {
+                    hotel = true;
+                }
+            }
+            
+            if (!hotel){
+                cv2 = cv2 + data[neighbors[j][0]][neighbors[j][1]][2] + data[neighbors[j][0]][neighbors[j][1]][3] + data[neighbors[j][0]][neighbors[j][1]][4];
+            }
+        }
+
+        loss = (cv1-cv2)/cv1;
+
+        if (data[coast[n][0]][coast[n][1]][5]==3){
+            impact = 0;
+        }
+        else if (data[coast[n][0]][coast[n][1]][5]==2){
+            if (loss > .6){
+                impact = 100;
+            }
+            else if (loss > .3){
+                impact = 50;
+            }
+            else {
+                impact = 0;
+            }
+        }
+        else {
+            if (loss > .6){
+                impact = 150;
+            }
+            else if (loss > .3){
+                impact = 100;
+            }
+            else {
+                impact = 0;
+            }
+        }
+
+        totalImpact = totalImpact + impact;
+            
+        document.write("<tr><td>"+(n+1)+"</td><td>"+coast[n][1]+"</td><td>"+coast[n][0]+"</td><td>"+data[coast[n][0]][coast[n][1]][5]+"</td><td>"+Math.round(cv1)+"</td><td>"+Math.round(cv2)+"</td><td>"+(loss).toFixed(2)+"</td><td>"+impact+"</td></tr>");
     }
+    document.write(totalImpact);
+    
     document.write("</table>");
     
     document.write("<p>Totals");

@@ -435,7 +435,92 @@ fished.push([pa[n][0],pa[n][1]]);
         }
     }
 
+    var coast = [[4,15],[5,15],[5,16],[6,16],[7,16],[8,15],[8,16],[9,15],[10,15],[11,15],[12,14],[13,14],[14,14],[15,13],[15,14],[16,13],[17,13],[18,12],[19,11],[19,12],[20,11],[21,10],[22,9],[22,10],[23,6],[23,7],[23,8],[23,9],[24,5],[25,5],[26,4],[26,5],[27,3],[28,2],[29,1],[30,1],[31,1]];
+    var cv1 = 0;
+    var cv2 = 0;
+    var loss = 0;
+    var impact = 0;
+    var totalImpact = 0;
+    var hotelNeighbors = [];
+    for (n=0; n<hotels.length; n++)
+    {
+        hotelNeighbors.push.apply(hotelNeighbors,findneighbors(hotels[n][0],hotels[n][1],xDim,yDim));
+    }
+    
+    for (n=0; (n<coast.length); n++)
+    {
 
+        cv1 = data[coast[n][0]][coast[n][1]][2] + data[coast[n][0]][coast[n][1]][3] + data[coast[n][0]][coast[n][1]][4];
+        neighbors = findneighbors(coast[n][0],coast[n][1],xDim,yDim);
+        for (j=0; j<neighbors.length; j++){
+            cv1 = cv1 + data[neighbors[j][0]][neighbors[j][1]][2] + data[neighbors[j][0]][neighbors[j][1]][3] + data[neighbors[j][0]][neighbors[j][1]][4];
+        }
+
+        hotel = false;
+        
+        for (h=0; !(hotel) && (h<hotels.length); h++)
+        {
+            if ((hotels[h][0] == coast[n][0]) && (hotels[h][1] == coast[n][1]))
+            {
+                hotel = true;
+            }
+        }
+
+        if (hotel){
+            cv2 = 0;
+        }
+        else {
+            cv2 = data[coast[n][0]][coast[n][1]][2] + data[coast[n][0]][coast[n][1]][3] + data[coast[n][0]][coast[n][1]][4];
+        }
+
+        for (j=0; j<neighbors.length; j++){
+            hotel = false;
+            for (h=0; !(hotel) && (h<hotelNeighbors.length); h++)
+            {
+                if ((hotelNeighbors[h][0] == neighbors[j][0]) && (hotelNeighbors[h][1] == neighbors[j][1]))
+                {
+                    hotel = true;
+                }
+            }
+            
+            if (!hotel){
+                cv2 = cv2 + data[neighbors[j][0]][neighbors[j][1]][2] + data[neighbors[j][0]][neighbors[j][1]][3] + data[neighbors[j][0]][neighbors[j][1]][4];
+            }
+        }
+
+        loss = (cv1-cv2)/cv1;
+
+        if (data[coast[n][0]][coast[n][1]][5]==3){
+            impact = 0;
+        }
+        else if (data[coast[n][0]][coast[n][1]][5]==2){
+            if (loss > .6){
+                impact = 100;
+            }
+            else if (loss > .3){
+                impact = 50;
+            }
+            else {
+                impact = 0;
+            }
+        }
+        else {
+            if (loss > .6){
+                impact = 150;
+            }
+            else if (loss > .3){
+                impact = 100;
+            }
+            else {
+                impact = 0;
+            }
+        }
+
+        totalImpact = totalImpact + impact;
+
+    }
+
+document.calculator.cv.value=Math.round(totalImpact);
 document.calculator.fish.value=Math.round(fishTotal);
 document.calculator.tour.value=Math.round(tourTotal);
 document.calculator.gain.value=Math.round(fishTotal)+Math.round(tourTotal);
@@ -443,7 +528,7 @@ document.calculator.coral.value=Math.round(coralTotal);
 document.calculator.groves.value=Math.round(grovesTotal);
 document.calculator.grass.value=Math.round(grassTotal);
 document.calculator.loss.value=Math.round(coralTotal)+Math.round(grovesTotal)+Math.round(grassTotal);
-document.calculator.score.value=(Math.round(tourTotal)+Math.round(fishTotal))-(Math.round(coralTotal)+Math.round(grovesTotal)+Math.round(grassTotal));
+document.calculator.score.value=(Math.round(tourTotal)+Math.round(fishTotal))-(Math.round(coralTotal)+Math.round(grovesTotal)+Math.round(grassTotal)+Math.round(totalImpact));
 }
 
 function example(){
@@ -628,6 +713,8 @@ document.calculator.score.value="";
         <td><input disabled type="txt" name="grass" size=4></td>
         <td>=</td>        
         <td><input disabled type="txt" name="loss" size=4></td></tr>
+
+         <tr><td></td><td></td><td></td><td></td><td align=right><font color="#FF0000">CV</font></td><td></td><td><input disabled type="txt" name="cv" size=4></td></tr>
 
         <tr><td></td><td></td><td></td><td></td><td align=right><b>Net Score<b></td><td></td><td><input disabled type="txt" name="score" size=4></td></tr>
         
