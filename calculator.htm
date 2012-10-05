@@ -436,14 +436,14 @@ fished.push([pa[n][0],pa[n][1]]);
     }
 
 
-document.calculator.fish.value=fishTotal;
-document.calculator.tour.value=tourTotal;
-document.calculator.gain.value=fishTotal+tourTotal;
-document.calculator.coral.value=coralTotal;
-document.calculator.groves.value=grovesTotal;
-document.calculator.grass.value=grassTotal;
-document.calculator.loss.value=coralTotal+grovesTotal+grassTotal;
-document.calculator.score.value=(tourTotal+fishTotal)-(coralTotal+grovesTotal+grassTotal);
+document.calculator.fish.value=Math.round(fishTotal);
+document.calculator.tour.value=Math.round(tourTotal);
+document.calculator.gain.value=Math.round(fishTotal)+Math.round(tourTotal);
+document.calculator.coral.value=Math.round(coralTotal);
+document.calculator.groves.value=Math.round(grovesTotal);
+document.calculator.grass.value=Math.round(grassTotal);
+document.calculator.loss.value=Math.round(coralTotal)+Math.round(grovesTotal)+Math.round(grassTotal);
+document.calculator.score.value=(Math.round(tourTotal)+Math.round(fishTotal))-(Math.round(coralTotal)+Math.round(grovesTotal)+Math.round(grassTotal));
 }
 
 function example(){
